@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BookHive</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+
+<header>
+    <h1>📚🐝 BookHive</h1>
+    <p>Buzz through your library in seconds</p>
+</header>
+
+<nav>
+    <a href="/">Home</a>
+
+    {% if session.get("role") == "admin" %}
+        <a href="/admin">Admin</a>
+    {% endif %}
+
+    {% if session.get("role") %}
+        <a href="/logout">Logout</a>
+    {% endif %}
+</nav>
+
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p>© 2025 BookHive | PBL – DSA</p>
+</footer>
+
+</body>
+</html>

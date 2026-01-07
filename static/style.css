@@ -1,0 +1,199 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    background: linear-gradient(135deg, #0b1220, #0f1b33);
+    color: #e5e7eb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ===== HEADER ===== */
+header {
+    background-color: transparent;
+    padding: 28px;
+    text-align: center;
+}
+
+header h1 {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+header h1 {
+    color: #ffffff;
+    font-size: 32px;
+    letter-spacing: 0.5px;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background: rgba(255,255,255,0.03);
+}
+
+
+nav a {
+    margin: 0 18px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #e0e7ff;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* ===== MAIN CONTENT ===== */
+main {
+    padding: 32px;
+}
+
+/* ===== CARD ===== */
+.card {
+    background-color: #ffffff;
+    max-width: 620px;
+    margin: auto;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    color: #1f2937;
+}
+
+
+/* ===== FORMS ===== */
+form {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #c7d2fe;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+/* ===== BUTTONS ===== */
+button, .btn {
+    background-color: #facc15;   /* yellow accent */
+    color: #4a3b00;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #eab308;
+    transform: translateY(-1px);
+}
+
+
+button:hover, .btn:hover {
+    background-color: #1e40af;
+}
+
+
+
+/* ===== TABLE ===== */
+table {
+    width: 100%;
+    margin-top: 24px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 14px;
+    border-bottom: 1px solid #e5e7f0;
+    text-align: center;
+    font-size: 15px;
+}
+
+th {
+    background-color: #eff6ff; /* very light blue */
+    color: #1e3a8a;
+}
+
+/* ===== ADMIN ACTION BUTTONS ===== */
+/* Admin button container fix */
+.admin-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;       /* 🔑 THIS FIXES OVERFLOW */
+    margin-top: 15px;
+}
+
+.admin-actions a {
+    font-size: 14px;
+    padding: 9px 14px;
+}
+
+
+
+/* ===== MESSAGE BOX ===== */
+.message {
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    color: #1e3a8a;
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    margin-top: auto;
+    padding: 14px;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 13px;
+    background: transparent;
+}
+
+/* Admin action buttons (yellow accent) */
+.card a {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #facc15;   /* soft yellow */
+    color: #4a3b00;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 6px 8px;
+    transition: all 0.25s ease;
+}
+
+.card a:hover {
+    background-color: #eab308;
+    transform: translateY(-1px);
+}
+
+/* Stack form for admin pages */
+.stack-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stack-form input,
+.stack-form button {
+    width: 100%;
+}

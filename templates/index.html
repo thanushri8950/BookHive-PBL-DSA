@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="card">
+    <h2>Search Books</h2>
+
+    <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Enter title or author" required>
+        <button type="submit">Search</button>
+    </form>
+</section>
+{% endblock %}

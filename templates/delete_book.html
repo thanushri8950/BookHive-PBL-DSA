@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Delete Book</h2>
+
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+
+    <form method="POST" class="stack-form">
+        <input 
+            type="number" 
+            name="book_id" 
+            placeholder="Enter Book ID to delete" 
+            required
+        >
+
+        <button type="submit">Delete Book</button>
+    </form>
+</div>
+{% endblock %}
