@@ -17,14 +17,11 @@
 <nav>
     <a href="/">Home</a>
 
-    {% if session.get("role") == "admin" %}
-        <a href="/admin">Admin</a>
-    {% endif %}
-
     {% if session.get("role") %}
         <a href="/logout">Logout</a>
     {% endif %}
 </nav>
+
 
 
 <main>
