@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, send_file
 import sqlite3
+import csv
 
 app = Flask(__name__)
 app.secret_key = "bookhive_secret_key"
@@ -15,7 +16,7 @@ def get_db_connection():
 
 
 # -------------------------------
-# Home (role select only)
+# Home (role selection)
 # -------------------------------
 @app.route("/")
 def home():
@@ -23,7 +24,7 @@ def home():
 
 
 # -------------------------------
-# Login (admin / student)
+# Login (Admin / Student)
 # -------------------------------
 @app.route("/login/<role>", methods=["GET", "POST"])
 def login(role):
@@ -45,7 +46,8 @@ def login(role):
 
         if user:
             session.clear()
-            session["role"] = role
+            session["user_id"] = user["id"]      # IMPORTANT
+            session["role"] = role               # IMPORTANT
             session["username"] = username
 
             if role == "admin":
@@ -59,7 +61,7 @@ def login(role):
 
 
 # -------------------------------
-# Signup (students only)
+# Signup (Students only)
 # -------------------------------
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -111,7 +113,7 @@ def student():
 
 
 # -------------------------------
-# Add book (admin)
+# Add book (Admin)
 # -------------------------------
 @app.route("/admin/add", methods=["GET", "POST"])
 def add_book():
@@ -142,7 +144,7 @@ def add_book():
 
 
 # -------------------------------
-# Issue book (admin)
+# Issue book (Admin)
 # -------------------------------
 @app.route("/admin/issue", methods=["GET", "POST"])
 def issue_book():
@@ -176,7 +178,7 @@ def issue_book():
 
 
 # -------------------------------
-# Return book (admin)
+# Return book (Admin)
 # -------------------------------
 @app.route("/admin/return", methods=["GET", "POST"])
 def return_book():
@@ -210,7 +212,7 @@ def return_book():
 
 
 # -------------------------------
-# Delete book (admin)
+# Delete book (Admin)
 # -------------------------------
 @app.route("/admin/delete", methods=["GET", "POST"])
 def delete_book():
@@ -244,24 +246,37 @@ def delete_book():
 
 
 # -------------------------------
-# Category view (admin)
+# Export books to CSV (Admin)
 # -------------------------------
-@app.route("/category")
-def category():
-    if session.get("role") != "admin":
+@app.route("/admin/export")
+def export_books():
+    if "role" not in session:
         return redirect("/login/admin")
 
     conn = get_db_connection()
-    books = conn.execute(
-        "SELECT category, GROUP_CONCAT(title, ', ') AS titles FROM books GROUP BY category"
-    ).fetchall()
+    books = conn.execute("SELECT * FROM books").fetchall()
     conn.close()
 
-    return render_template("category.html", books=books)
+    filename = "books_export.csv"
+
+    with open(filename, "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["ID", "Title", "Author", "Category", "Available"])
+
+        for book in books:
+            writer.writerow([
+                book["id"],
+                book["title"],
+                book["author"],
+                book["category"],
+                "Yes" if book["available"] == 1 else "No"
+            ])
+
+    return send_file(filename, as_attachment=True)
 
 
 # -------------------------------
-# Search books (student)
+# Search books (Student)
 # -------------------------------
 @app.route("/search")
 def search():
